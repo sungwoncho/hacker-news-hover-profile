@@ -2,7 +2,7 @@
 
 A chrome extension to view Hacker News user profiles by hovering over usernames.
 
-![](https://github.com/sungwoncho/hn-hover-profile/demo.gif)
+![](https://github.com/sungwoncho/hacker-news-hover-profile/blob/master/demo.gif)
 
 ## Contributing
 
