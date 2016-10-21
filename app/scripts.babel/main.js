@@ -18,6 +18,17 @@ function getUserEndpoint(username) {
   return `https://hacker-news.firebaseio.com/v0/user/${username}.json`;
 }
 
+// fromEpochToDaysAgo returns 'x days ago' based on epoch
+function fromEpochToDaysAgo(epoch) {
+  let secs = ((new Date()).getTime() / 1000) - epoch;
+  let minutes = secs / 60;
+  let hours = minutes / 60;
+  let days = Math.floor(hours / 24);
+
+  return days + (days > 1 ? ' days ago' : ' day ago');
+}
+
+
 const app = {
   init() {
     const cardContainerURL = chrome.extension.getURL('card-container.html');
@@ -49,6 +60,7 @@ const app = {
     child.innerHTML = str;
     let el = child.firstChild;
     document.body.appendChild(el);
+    document.getElementsByClassName('hpc-container')[0].className += ' is-loading';
 
     // Get user info and replace the loader with the actual content
     callAjax(endpoint, (res) => {
@@ -56,7 +68,7 @@ const app = {
       let str = this.getCardHtml({
         username,
         about: data.about,
-        created: data.created,
+        created: fromEpochToDaysAgo(data.created),
         karma: data.karma
       });
 
@@ -67,6 +79,9 @@ const app = {
       let loader = document.getElementsByClassName('hpc-loader')[0];
       loader.parentNode.removeChild(loader);
       document.getElementsByClassName('hpc-container')[0].appendChild(el);
+
+      // Remove `is-loading` CSS class
+      document.getElementsByClassName('hpc-container')[0].className += 'hcp-container';
     });
   },
 

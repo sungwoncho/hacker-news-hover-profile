@@ -4,11 +4,43 @@
   background: white;
   padding: 11px 13px;
   width: 216px;
-  height: 138px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: auto;
   border-radius: 3px;
   // border: 1px solid #e45400;
   border: 1px solid #ff5e00;
+
+  &.is-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 138px;
+  }
+
+  .hpc-row {
+    margin-bottom: 8px;
+  }
+
+  .hpc-label {
+    margin-right: 3px;
+  }
+
+  .hpc-about {
+    word-wrap: break-word;
+    margin-top: 8px;
+    max-height: 133px;
+    overflow-y: scroll;
+  }
+
+  .hpc-user-link {
+    text-decoration: underline;
+    font-size: inherit;
+
+    &:visited {
+      color: inherit;
+    }
+  }
+
+  .hpc-value {
+    color: #000000;
+  }
 }
