@@ -1,0 +1,33 @@
+body {
+  width: 150px;
+  margin: 0;
+}
+
+.header {
+  background: #ff5e00;
+  text-align: center;
+
+  h1 {
+    font-size: 1.3em;
+    margin: 0;
+    font-size: 13px;
+    padding: 3px 4px;
+  }
+}
+
+main {
+  text-align: center;
+
+  .footer {
+    color: darkgrey;
+    font-size: 94%;
+
+    .footer-row {
+      margin-bottom: 2px;
+    }
+
+    a {
+      color: darkgrey;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "HN Hover Profile",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "manifest_version": 2,
   "description": "Hover profile card for Hacker News users",
   "icons": {
@@ -32,5 +32,8 @@
     "card.html",
     "loader.svg"
   ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
   "permissions": []
 }
