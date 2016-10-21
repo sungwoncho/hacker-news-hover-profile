@@ -81,12 +81,12 @@ const app = {
     const xPos = rectObj.right - rectObj.width / 2 - 108;
     const yPos = rectObj.top + window.scrollY - 5;
 
-    document.getElementById('hpc-card-overlay').style.left = xPos;
-    document.getElementById('hpc-card-overlay').style.top = yPos;
+    document.getElementById('hhp-card-overlay').style.left = xPos;
+    document.getElementById('hhp-card-overlay').style.top = yPos;
 
     // add CSS classes
-    document.getElementById('hpc-card-overlay').className += ' visible';
-    document.getElementById('hpc-card-container').className += ' is-loading';
+    document.getElementById('hhp-card-overlay').className += ' visible';
+    document.getElementById('hhp-card-container').className += ' is-loading';
 
     // Get user info
     callAjax(endpoint, (res) => {
@@ -103,18 +103,18 @@ const app = {
       let el = child.firstChild;
 
       // Remove `is-loading` CSS class
-      document.getElementById('hpc-card-container').className = '';
+      document.getElementById('hhp-card-container').className = '';
       // Mount the card content
-      document.getElementById('hpc-card').appendChild(el);
+      document.getElementById('hhp-card').appendChild(el);
     });
   },
 
   hideCard(event) {
-    const card = document.getElementById('hpc-card-content');
+    const card = document.getElementById('hhp-card-content');
     card.parentNode.removeChild(card);
 
     // Remove `visible` CSS class
-    document.getElementById('hpc-card-overlay').className = '';
+    document.getElementById('hhp-card-overlay').className = '';
 
     this.state.isShowingCard = false;
   }

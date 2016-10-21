@@ -1,4 +1,4 @@
-#hpc-card-overlay  {
+#hhp-card-overlay  {
   z-index: 1;
   position: absolute;
   max-height: 231px;
@@ -9,12 +9,12 @@
     display: block;
   }
 
-  #hpc-card {
+  #hhp-card {
     overflow: hidden;
     height: 100%;
   }
 
-  #hpc-card-container {
+  #hhp-card-container {
     // position: absolute
     // bottom: 0;
     height: 80%;
@@ -58,32 +58,32 @@
       justify-content: center;
       height: 138px;
 
-      #hpc-loader {
+      #hhp-loader {
         display: inherit;
       }
     }
   }
 
-  #hpc-loader {
+  #hhp-loader {
     display: none;
   }
 
-  .hpc-row {
+  .hhp-row {
     margin-bottom: 8px;
   }
 
-  .hpc-label {
+  .hhp-label {
     margin-right: 3px;
   }
 
-  .hpc-about {
+  .hhp-about {
     word-wrap: break-word;
     margin-top: 8px;
     max-height: 133px;
     overflow-y: scroll;
   }
 
-  .hpc-user-link {
+  .hhp-user-link {
     text-decoration: underline;
     font-size: inherit;
 
@@ -92,7 +92,7 @@
     }
   }
 
-  .hpc-value {
+  .hhp-value {
     color: #000000;
   }
 }
