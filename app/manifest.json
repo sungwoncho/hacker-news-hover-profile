@@ -2,7 +2,7 @@
   "name": "HN Hover Profile",
   "version": "0.1.0",
   "manifest_version": 2,
-  "description": "Hover profile card for Hacker News users",
+  "description": "View Hacker News user profiles by hovering over usernames",
   "icons": {
     "16": "images/icon-16.png",
     "128": "images/icon-128.png"
