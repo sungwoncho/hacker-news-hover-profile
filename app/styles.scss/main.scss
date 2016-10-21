@@ -1,19 +1,72 @@
-.hpc-container {
+#hpc-card-overlay  {
   z-index: 1;
   position: absolute;
-  background: white;
-  padding: 11px 13px;
   width: 216px;
-  height: auto;
-  border-radius: 3px;
-  // border: 1px solid #e45400;
-  border: 1px solid #ff5e00;
+  height: 231px;
+  display: none;
+  padding-top: 24px;
 
-  &.is-loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 138px;
+  &.visible {
+    display: block;
+  }
+
+  #hpc-card {
+    overflow: hidden;
+    height: 100%;
+  }
+
+  #hpc-card-container {
+    // position: absolute
+    // bottom: 0;
+    height: 80%;
+    background: white;
+    padding: 11px 13px;
+    border-radius: 3px;
+    border: 1px solid #a48789;
+    width: 100%;
+    // box-sizing: border-box;
+    height: 93%;
+    position: relative;
+
+    &:after, &:before {
+      bottom: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    &:after {
+      border-color: rgba(255, 255, 255, 0);
+    	border-bottom-color: #ffffff;
+    	border-width: 6px;
+    	margin-left: -6px;
+    }
+    &:before {
+      border-color: rgba(164, 135, 137, 0);
+    	border-bottom-color: #a48789;
+    	border-width: 7px;
+    	margin-left: -7px;
+    }
+
+    &.is-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 138px;
+
+      #hpc-loader {
+        display: inherit;
+      }
+    }
+  }
+
+  #hpc-loader {
+    display: none;
   }
 
   .hpc-row {

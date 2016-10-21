@@ -28,41 +28,67 @@ function fromEpochToDaysAgo(epoch) {
   return days + (days > 1 ? ' days ago' : ' day ago');
 }
 
-
 const app = {
+  state: {
+    isShowingCard: false
+  },
+
   init() {
     const cardContainerURL = chrome.extension.getURL('card-container.html');
     const cardURL = chrome.extension.getURL('card.html');
+    const loaderURL = chrome.extension.getURL('loader.svg');
 
-    callAjax(cardURL, (res) => {
-      this.getCardHtml = template(res); // Save reference
+    // Append eventListeners to username anchors
+    let userLinks = document.getElementsByClassName('hnuser')
+    for (let i = 0; i < userLinks.length; i++) {
+      userLinks[i].addEventListener('mouseenter', app.showCard.bind(this), false);
+    }
+
+    // Save reference for getCardHtml
+    callAjax(cardURL, (cardTmplStr) => {
+      this.getCardHtml = template(cardTmplStr);
     });
-    callAjax(cardContainerURL, (res) => {
-      this.getCardContainerHtml = template(res); // Save reference
+
+    // Mount container with loader on DOM
+    callAjax(cardContainerURL, (cardContainerTmplStr) => {
+      const compiledTmpl = template(cardContainerTmplStr);
+      let str = compiledTmpl({
+        left: 0,
+        top: 0,
+        loaderURL
+      });
+      let child = document.createElement('div');
+      child.innerHTML = str;
+      let el = child.firstChild;
+      document.body.appendChild(el);
+
+      el.addEventListener('mouseleave', this.hideCard.bind(this), false);
     });
   },
 
   showCard(event) {
+    const { isShowingCard } = this.state;
+    if (isShowingCard) {
+      return;
+    }
+
+    this.state.isShowingCard = true;
+
     const username = event.target.innerHTML;
     const endpoint = getUserEndpoint(username);
 
-    const xPos = event.pageX;
-    const yPos = event.pageY;
-    const loaderURL = chrome.extension.getURL('loader.svg');
+    const rectObj = event.target.getBoundingClientRect();
+    const xPos = rectObj.right - rectObj.width / 2 - 108;
+    const yPos = rectObj.top + window.scrollY - 5;
 
-    // Mount container with loader on DOM
-    let str = this.getCardContainerHtml({
-      left: xPos,
-      top: yPos,
-      loaderURL: loaderURL
-    });
-    let child = document.createElement('div');
-    child.innerHTML = str;
-    let el = child.firstChild;
-    document.body.appendChild(el);
-    document.getElementsByClassName('hpc-container')[0].className += ' is-loading';
+    document.getElementById('hpc-card-overlay').style.left = xPos;
+    document.getElementById('hpc-card-overlay').style.top = yPos;
 
-    // Get user info and replace the loader with the actual content
+    // add CSS classes
+    document.getElementById('hpc-card-overlay').className += ' visible';
+    document.getElementById('hpc-card-container').className += ' is-loading';
+
+    // Get user info
     callAjax(endpoint, (res) => {
       let data = JSON.parse(res);
       let str = this.getCardHtml({
@@ -76,29 +102,23 @@ const app = {
       child.innerHTML = str;
       let el = child.firstChild;
 
-      let loader = document.getElementsByClassName('hpc-loader')[0];
-      loader.parentNode.removeChild(loader);
-      document.getElementsByClassName('hpc-container')[0].appendChild(el);
-
       // Remove `is-loading` CSS class
-      document.getElementsByClassName('hpc-container')[0].className += 'hcp-container';
+      document.getElementById('hpc-card-container').className = '';
+      // Mount the card content
+      document.getElementById('hpc-card').appendChild(el);
     });
   },
 
-  hideCard() {
-    let cards = document.getElementsByClassName('hpc-container');
-    for (let i = 0; i < cards.length; i++) {
-      let node = cards[i];
-      node.parentNode.removeChild(node);
-    }
+  hideCard(event) {
+    const card = document.getElementById('hpc-card-content');
+    card.parentNode.removeChild(card);
+
+    // Remove `visible` CSS class
+    document.getElementById('hpc-card-overlay').className = '';
+
+    this.state.isShowingCard = false;
   }
 }
 
+// init app
 app.init();
-
-// Append eventListeners to username anchors
-let userLinks = document.getElementsByClassName('hnuser')
-for (let i = 0; i < userLinks.length; i++) {
-  userLinks[i].addEventListener('mouseover', app.showCard.bind(app), false);
-  userLinks[i].addEventListener('mouseout', app.hideCard.bind(app), false);
-}

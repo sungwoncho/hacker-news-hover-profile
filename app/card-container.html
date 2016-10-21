@@ -1,13 +1,17 @@
 <div
-  class="hpc-container"
+  id="hpc-card-overlay"
   style="
     left: <%= left %>;
     top: <%= top %>;
   "
 >
-  <img
-    class="hpc-loader"
-    src="<%= loaderURL %>"
-    alt="loader"
-  />
+  <div id="hpc-card-container">
+    <div id="hpc-card">
+      <img
+        id="hpc-loader"
+        src="<%= loaderURL %>"
+        alt="loader"
+      />
+    </div>
+  </div>
 </div>
