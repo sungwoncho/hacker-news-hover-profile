@@ -1,8 +1,7 @@
 #hpc-card-overlay  {
   z-index: 1;
   position: absolute;
-  width: 216px;
-  height: 231px;
+  max-height: 231px;
   display: none;
   padding-top: 24px;
 
@@ -23,7 +22,7 @@
     padding: 11px 13px;
     border-radius: 3px;
     border: 1px solid #a48789;
-    width: 100%;
+    width: 216px;
     // box-sizing: border-box;
     height: 93%;
     position: relative;

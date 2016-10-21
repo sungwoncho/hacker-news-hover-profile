@@ -16,7 +16,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://news.ycombinator.com/*"
+        "https://news.ycombinator.com/item*",
+        "https://news.ycombinator.com/news*"
       ],
       "js": [
         "scripts/main.js"
