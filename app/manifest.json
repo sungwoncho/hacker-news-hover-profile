@@ -1,0 +1,35 @@
+{
+  "name": "HN Hover Profile",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Hover profile card for Hacker News users",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/chromereload.js",
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://news.ycombinator.com/*"
+      ],
+      "js": [
+        "scripts/main.js"
+      ],
+      "css" : [
+        "styles/main.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "card-container.html",
+    "card.html",
+    "loader.svg"
+  ],
+  "permissions": []
+}
