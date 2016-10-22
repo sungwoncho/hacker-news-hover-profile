@@ -1,5 +1,5 @@
 {
-  "name": "HN Hover Profile",
+  "name": "Hacker News Hover Profile",
   "version": "0.1.0",
   "manifest_version": 2,
   "description": "View Hacker News user profiles by hovering over usernames",
@@ -16,8 +16,10 @@
   "content_scripts": [
     {
       "matches": [
-        "https://news.ycombinator.com/item*",
-        "https://news.ycombinator.com/news*"
+        "https://news.ycombinator.com/*"
+      ],
+      "exclude_matches": [
+        "https://news.ycombinator.com/user*"
       ],
       "js": [
         "scripts/main.js"
